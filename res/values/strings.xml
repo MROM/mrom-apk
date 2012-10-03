@@ -1,12 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">MROM</string>
-    <string name="checkin_service_name">CheckIn</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_test_checkin">MROM Check Version</string>
-    <string name="mrom_trigger_text">Push the button to trigger MROM version check. The notification icon will display
-        should a new version be available</string>
-    <string name="mrom_version_check">MROM Version Check</string>
-
+	<string name="app_name">MROM</string>
+	<string name="checkin_service_name">CheckIn</string>
+	<string name="menu_settings">Settings</string>
+	<string name="menu_quit">Quit</string>
+	<string name="main_description">To check for an update, tap the button below. If a new version is available, you will see a notification.</string>
+	<string name="main_title">MROM Version Check</string>
+	<string name="btn_check">Check Version</string>
+	<string name="btn_ok">OK</string>
+	<string name="alert">MROM Alert</string>
+	<string name="new_version_available">New MROM version available, visit www.montuori.net to download.</string>
+	<string name="msg_checking">Checking for new version, please wait...</string>
+	<string name="err_title">Error</string>
+	<string name="err_device"><![CDATA[
+		Unfortunately this device is not compatible with any of the MROM versions currently available.
+	]]></string>
+	<string name="err_connection"><![CDATA[
+		No internet connection available.<br />
+		Please check your connection and try again.
+	]]></string>
+	<string name="err_checking"><![CDATA[
+		Error checking for new version.<br />
+		Please try again later.
+	]]></string>
+	<string name="msg_new_version"><![CDATA[
+		<big><b>New version of MROM available!</b></big><br />
+		<br />
+		Latest version:<br />
+		<tt>%s</tt><br />
+		<br />
+		Please visit <a href="http://www.montuori.net/">www.montuori.net</a> to download.
+	]]></string>
+	<string name="msg_latest_version"><![CDATA[
+		You are running the latest version of MROM.
+	]]></string>
 </resources>

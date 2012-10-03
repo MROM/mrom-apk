@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/dialog_root" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical">
+	<TextView android:id="@+id/dialog_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="18dp" android:padding="8dp" android:textColor="@android:color/secondary_text_dark_nodisable" android:textColorHighlight="@android:color/secondary_text_dark_nodisable" />
+</LinearLayout>
