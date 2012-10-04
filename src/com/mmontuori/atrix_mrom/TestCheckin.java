@@ -43,7 +43,14 @@ public class TestCheckin extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_settings: {
-				// not implemented yet;
+					// not implemented yet
+				}
+				break;
+			case R.id.menu_about: {
+					Utils.showDialog(this,
+						getText(R.string.about_title).toString(),
+						String.format(getText(R.string.about_text).toString(), Utils.getMyVersion(this))
+					);
 				}
 				break;
 			case R.id.menu_quit: {

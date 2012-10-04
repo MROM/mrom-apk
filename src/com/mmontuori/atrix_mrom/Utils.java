@@ -9,14 +9,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Enumeration;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.Html;
@@ -187,5 +186,14 @@ public class Utils {
 			}
 		});
 		builder.create().show();
+	}
+
+	static public String getMyVersion(Context ctx) {
+		try {
+			PackageInfo pkg = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
+			return pkg.versionName;
+		}
+		catch (Exception ex) { }
+		return null;
 	}
 }
