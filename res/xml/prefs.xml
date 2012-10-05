@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<PreferenceCategory android:title="@string/pref_section_general">
+		<CheckBoxPreference android:key="check_on_boot" android:title="@string/pref_check_on_boot" android:defaultValue="true" />
+	</PreferenceCategory>
+</PreferenceScreen>
