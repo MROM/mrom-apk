@@ -7,8 +7,11 @@
 	<string name="menu_quit">Quit</string>
 	<string name="main_description">To check for an update, tap the button below. If a new version is available, you will see a notification.</string>
 	<string name="main_title">MROM Version Check</string>
+	<string name="prefs_title">Settings</string>
 	<string name="btn_check">Check Version</string>
 	<string name="btn_ok">OK</string>
+	<string name="pref_section_general">General</string>
+	<string name="pref_check_on_boot">Check on each boot</string>
 	<string name="alert">MROM Alert</string>
 	<string name="about_title">About</string>
 	<string name="about_text"><![CDATA[

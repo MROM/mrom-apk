@@ -15,43 +15,49 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int btn_check=0x7f070000;
-        public static final int dialog_root=0x7f070001;
-        public static final int dialog_text=0x7f070002;
-        public static final int menu_about=0x7f070004;
-        public static final int menu_quit=0x7f070005;
-        public static final int menu_settings=0x7f070003;
+        public static final int btn_check=0x7f080000;
+        public static final int dialog_root=0x7f080001;
+        public static final int dialog_text=0x7f080002;
+        public static final int menu_about=0x7f080004;
+        public static final int menu_quit=0x7f080005;
+        public static final int menu_settings=0x7f080003;
     }
     public static final class layout {
         public static final int activity_test_checkin=0x7f030000;
         public static final int dialog=0x7f030001;
     }
     public static final class menu {
-        public static final int activity_test_checkin=0x7f060000;
+        public static final int activity_test_checkin=0x7f070000;
     }
     public static final class string {
-        public static final int about_text=0x7f04000b;
-        public static final int about_title=0x7f04000a;
-        public static final int alert=0x7f040009;
-        public static final int app_name=0x7f040000;
-        public static final int btn_check=0x7f040007;
-        public static final int btn_ok=0x7f040008;
-        public static final int checkin_service_name=0x7f040001;
-        public static final int err_checking=0x7f040011;
-        public static final int err_connection=0x7f040010;
-        public static final int err_device=0x7f04000f;
-        public static final int err_title=0x7f04000e;
-        public static final int main_description=0x7f040005;
-        public static final int main_title=0x7f040006;
-        public static final int menu_about=0x7f040003;
-        public static final int menu_quit=0x7f040004;
-        public static final int menu_settings=0x7f040002;
-        public static final int msg_checking=0x7f04000d;
-        public static final int msg_latest_version=0x7f040013;
-        public static final int msg_new_version=0x7f040012;
-        public static final int new_version_available=0x7f04000c;
+        public static final int about_text=0x7f05000e;
+        public static final int about_title=0x7f05000d;
+        public static final int alert=0x7f05000c;
+        public static final int app_name=0x7f050000;
+        public static final int btn_check=0x7f050008;
+        public static final int btn_ok=0x7f050009;
+        public static final int checkin_service_name=0x7f050001;
+        public static final int err_checking=0x7f050014;
+        public static final int err_connection=0x7f050013;
+        public static final int err_device=0x7f050012;
+        public static final int err_title=0x7f050011;
+        public static final int main_description=0x7f050005;
+        public static final int main_title=0x7f050006;
+        public static final int menu_about=0x7f050003;
+        public static final int menu_quit=0x7f050004;
+        public static final int menu_settings=0x7f050002;
+        public static final int msg_checking=0x7f050010;
+        public static final int msg_latest_version=0x7f050016;
+        public static final int msg_new_version=0x7f050015;
+        public static final int new_version_available=0x7f05000f;
+        public static final int pref_check_on_boot=0x7f05000b;
+        public static final int pref_section_general=0x7f05000a;
+        public static final int prefs_title=0x7f050007;
     }
     public static final class style {
-        public static final int AppTheme=0x7f050000;
+        public static final int AppTheme=0x7f060000;
+    }
+    public static final class xml {
+        public static final int prefs=0x7f040000;
     }
 }

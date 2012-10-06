@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 public class CheckIn extends Service {
 	@Override
@@ -31,6 +32,13 @@ public class CheckIn extends Service {
 
 	protected void doCheck() {
 		try {
+			Settings s = new Settings();
+			s.loadPrefs(this.getBaseContext());
+			if (!s.checkOnBoot) {
+				Log.i(Utils.TAG, "skipping on-boot check");
+				return;
+			}
+			Log.i(Utils.TAG, "starting on-boot check");
 			String remote_version = Utils.checkForNewVersion(this.getBaseContext(), true);
 			if (remote_version != null) {
 				NotificationManager notifManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
