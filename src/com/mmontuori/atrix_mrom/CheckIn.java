@@ -45,13 +45,18 @@ public class CheckIn extends Service {
 				Notification note = new Notification(R.drawable.ic_launcher, getText(R.string.alert), System.currentTimeMillis());
 				note.setLatestEventInfo(this,
 					getText(R.string.alert),
-					getText(R.string.new_version_available),
+					String.format(getText(R.string.new_version_available).toString(), remote_version),
 					PendingIntent.getActivity(this, 0, new Intent(this, CheckIn.class), 0)
 				);
 				notifManager.notify(2456, note);
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
+			String http = Utils.getData();
+			if (http != null) {
+				System.err.println("received HTTP data: [" + http + "]");
+			}
 		}
 	}
 }

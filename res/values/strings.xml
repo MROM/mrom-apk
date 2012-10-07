@@ -25,7 +25,7 @@
 		<br />
 		For more information about MROM, please visit <a href="http://www.montuori.net/android-mrom/">www.montuori.net</a>.
 	]]></string>
-	<string name="new_version_available">New MROM version available, visit www.montuori.net to download.</string>
+	<string name="new_version_available">New MROM version available. Visit www.montuori.net to download.</string>
 	<string name="msg_checking">Checking for new version, please wait...</string>
 	<string name="err_title">Error</string>
 	<string name="err_device"><![CDATA[

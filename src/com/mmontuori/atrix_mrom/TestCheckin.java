@@ -74,6 +74,10 @@ public class TestCheckin extends Activity {
 		}
 		if (data.ex != null) {
 			data.ex.printStackTrace();
+			String http = Utils.getData();
+			if (http != null) {
+				System.err.println("received HTTP data: [" + http + "]");
+			}
 			String err = null;
 			String cname = data.ex.getClass().getName();
 			if (Utils.IncompatibleDeviceException.class.getName().equals(cname)) {
@@ -84,11 +88,17 @@ public class TestCheckin extends Activity {
 				err = getText(R.string.err_checking).toString();
 			}
 			Utils.showDialog(this, getText(R.string.err_title).toString(), err);
-		}  else {
+		} else {
 			if (data.version == null) {
-				Utils.showDialog(this, getText(R.string.main_title).toString(), getText(R.string.msg_latest_version).toString());
+				Utils.showDialog(this,
+					getText(R.string.main_title).toString(),
+					getText(R.string.msg_latest_version).toString()
+				);
 			} else {
-				Utils.showDialog(this, getText(R.string.main_title).toString(), String.format(getText(R.string.msg_new_version).toString(), data.version));
+				Utils.showDialog(this,
+					getText(R.string.main_title).toString(),
+					String.format(getText(R.string.msg_new_version).toString(), Utils.htmlEsc(data.version))
+				);
 			}
 		}
 	}

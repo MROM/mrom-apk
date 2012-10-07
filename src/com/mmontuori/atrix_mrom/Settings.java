@@ -37,7 +37,4 @@ public class Settings extends PreferenceActivity {
 			checkOnBoot = true;
 		}
 	}
-
-	public static void savePrefs() {
-	}
 }

@@ -29,6 +29,7 @@ import android.widget.TextView;
 public class Utils {
 	final static public String TAG = "MROM";
 	final static public String BASEURL = "http://www.montuori.net/mrom/checkin.php";
+	static public String _data = null;
 
 	@SuppressWarnings("serial")
 	static public class IncompatibleDeviceException extends Exception { }
@@ -47,8 +48,9 @@ public class Utils {
 					}
 				}
 			}
-		} catch (SocketException ex) {
-			Log.e("Checkin", ex.toString());
+		}
+		catch (SocketException ex) {
+			Log.e(TAG, ex.toString());
 		}
 		return null;
 	}
@@ -100,12 +102,11 @@ public class Utils {
 	}
 
 	static public String checkForNewVersion(final Context ctx, final boolean isService) throws Exception {
-		//Thread.sleep(2000);
+		_data = "";
 		String myIP = null;
 		while (true) {
 			myIP = getLocalIpAddress();
 			if (myIP != null || !isService) {
-				// return Service.START_FLAG_RETRY;
 				break;
 			}
 			Thread.sleep(500);
@@ -120,15 +121,14 @@ public class Utils {
 			URLEncoder.encode(getDeviceId(ctx))
 		));
 		Log.i(TAG, "Checking in: " + url.toString());
-		String data = "";
 		try {
 			URLConnection urlConnection = url.openConnection();
 			BufferedInputStream in = new BufferedInputStream(urlConnection.getInputStream(), 2048);
 			try {
 				while (in.available() > 0) {
 					byte bt[] = new byte[2048];
-					in.read(bt);
-					data += new String(bt);
+					int read = in.read(bt);
+					_data += (new String(bt)).substring(0, read);
 				}
 			} finally {
 				in.close();
@@ -138,7 +138,7 @@ public class Utils {
 			throw new NoConnectionException();
 		}
 
-		JSONArray a = new JSONArray(data);
+		JSONArray a = new JSONArray(_data);
 		String remote_version = null;
 		boolean found = false;
 		for (int i = 0; i < a.length(); i++) {
@@ -195,5 +195,22 @@ public class Utils {
 		}
 		catch (Exception ex) { }
 		return null;
+	}
+
+	static public String getData() {
+		String str = _data;
+		if (str == null || str.equals("")) {
+			return null;
+		}
+		return str.replace("\r", "").replace("\n", "\\n");
+	}
+
+	static public String htmlEsc(String str) {
+		return str
+			.replace("&", "&amp;")
+			.replace("<", "&lt;")
+			.replace(">", "&gt;")
+			.replace("\"", "&quot;")
+		;
 	}
 }
