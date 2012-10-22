@@ -48,9 +48,13 @@ public class TestCheckin extends Activity {
 				}
 				break;
 			case R.id.menu_about: {
+					String version = Utils.getMyVersion(this);
+					if (version == null || version.equals("")) {
+						version = getText(R.string.version_unknown).toString();
+					}
 					Utils.showDialog(this,
 						getText(R.string.about_title).toString(),
-						String.format(getText(R.string.about_text).toString(), Utils.getMyVersion(this))
+						String.format(getText(R.string.about_text).toString(), Utils.htmlEsc(version))
 					);
 				}
 				break;
