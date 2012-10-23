@@ -14,6 +14,7 @@
 	<string name="pref_check_on_boot">Check on each boot</string>
 	<string name="alert">MROM Alert</string>
 	<string name="about_title">About</string>
+	<string name="version_unknown"><![CDATA[<unknown>]]></string>
 	<string name="about_text"><![CDATA[
 		<big><b>MROM Version Check</b></big><br />
 		release %1$s<br />
