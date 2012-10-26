@@ -98,14 +98,16 @@ public class Utils {
 	}
 
 	static public String getDeviceId(Context ctx) {
-		String device_id;
-		final TelephonyManager tm = (TelephonyManager)ctx.getSystemService(Context.TELEPHONY_SERVICE);
-		device_id = tm.getDeviceId();
-		if (device_id == null) {
-			device_id = Secure.getString(ctx.getContentResolver(),
-                Secure.ANDROID_ID);
+		try {
+			final TelephonyManager tm = (TelephonyManager)ctx.getSystemService(Context.TELEPHONY_SERVICE);
+			String device_id = tm.getDeviceId();
+			if (device_id == null) {
+				device_id = Secure.getString(ctx.getContentResolver(), Secure.ANDROID_ID);
+			}
+			return device_id; 
 		}
-		return device_id; 
+		catch (Exception ex) { }
+		return null;
 	}
 
 	static public String checkForNewVersion(final Context ctx, final boolean isService) throws Exception {
