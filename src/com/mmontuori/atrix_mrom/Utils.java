@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.os.Build;
+import android.provider.Settings.Secure;
 import android.telephony.TelephonyManager;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -97,8 +98,14 @@ public class Utils {
 	}
 
 	static public String getDeviceId(Context ctx) {
+		String device_id;
 		final TelephonyManager tm = (TelephonyManager)ctx.getSystemService(Context.TELEPHONY_SERVICE);
-		return tm.getDeviceId();
+		device_id = tm.getDeviceId();
+		if (device_id == null) {
+			device_id = Secure.getString(ctx.getContentResolver(),
+                Secure.ANDROID_ID);
+		}
+		return device_id; 
 	}
 
 	static public String checkForNewVersion(final Context ctx, final boolean isService) throws Exception {
@@ -114,6 +121,9 @@ public class Utils {
 		if (myIP == null) {
 			throw new NoConnectionException();
 		}
+		Log.i(Utils.TAG, "myIp:" + myIP);
+		Log.i(Utils.TAG, "getBuildData:" + getBuildData());
+		Log.i(Utils.TAG, "getDeviceId:" + getDeviceId(ctx));
 		URL url = new URL(String.format("%s?ip=%s&build=%s&device_id=%s",
 			BASEURL,
 			URLEncoder.encode(myIP),
