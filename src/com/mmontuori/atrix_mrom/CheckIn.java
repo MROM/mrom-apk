@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
@@ -32,26 +33,44 @@ public class CheckIn extends Service {
 
 	protected void doCheck() {
 		try {
-			Settings s = new Settings();
-			s.loadPrefs(this.getBaseContext());
-			if (!s.checkOnBoot) {
-				Log.i(Utils.TAG, "skipping on-boot check");
-				return;
-			}
-			Log.i(Utils.TAG, "starting on-boot check");
-			String remote_version = Utils.checkForNewVersion(this.getBaseContext(), true);
-			if (remote_version != null) {
-				NotificationManager notifManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-				Notification note = new Notification(R.drawable.ic_launcher, getText(R.string.alert), System.currentTimeMillis());
-				note.setLatestEventInfo(this,
-					getText(R.string.alert),
-					String.format(getText(R.string.new_version_available).toString(), remote_version),
-					PendingIntent.getActivity(this, 0, new Intent(this, CheckIn.class), 0)
-				);
-				notifManager.notify(2456, note);
-			}
-		}
-		catch (Exception e) {
+			final Settings s = new Settings();
+			final Context ctx = this.getBaseContext();
+			final CheckIn chkIn = this;
+			s.loadPrefs(ctx);
+			Thread t = new Thread() {
+				public void run() {
+					try {
+					if (!s.checkOnBoot) {
+						Log.i(Utils.TAG, "skipping on-boot check");
+						return;
+					}
+					Log.i(Utils.TAG, "starting on-boot check");
+					String remote_version = Utils.checkForNewVersion(ctx, true);
+					if (remote_version != null) {
+						NotificationManager notifManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+						Notification note = new Notification(
+								R.drawable.ic_launcher,
+								getText(R.string.alert),
+								System.currentTimeMillis());
+						note.setLatestEventInfo(chkIn, getText(R.string.alert),
+								String.format(
+										getText(R.string.new_version_available)
+												.toString(), remote_version),
+								PendingIntent.getActivity(chkIn, 0, new Intent(
+										chkIn, CheckIn.class), 0));
+						notifManager.notify(2456, note);
+					}
+					} catch ( Exception ex ) {
+						ex.printStackTrace();
+						String http = Utils.getData();
+						if (http != null) {
+							System.err.println("received HTTP data: [" + http + "]");
+						}
+					}
+				}
+			};
+			t.start();
+		} catch (Exception e) {
 			e.printStackTrace();
 			String http = Utils.getData();
 			if (http != null) {
