@@ -35,32 +35,33 @@ public class CheckIn extends Service {
 		try {
 			final Settings s = new Settings();
 			final Context ctx = this.getBaseContext();
-			final CheckIn chkIn = this;
 			s.loadPrefs(ctx);
+			if (!s.checkOnBoot) {
+				Log.i(Utils.TAG, "skipping on-boot check");
+				return;
+			}
 			Thread t = new Thread() {
 				public void run() {
 					try {
-					if (!s.checkOnBoot) {
-						Log.i(Utils.TAG, "skipping on-boot check");
-						return;
-					}
-					Log.i(Utils.TAG, "starting on-boot check");
-					String remote_version = Utils.checkForNewVersion(ctx, true);
-					if (remote_version != null) {
-						NotificationManager notifManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-						Notification note = new Notification(
+						Log.i(Utils.TAG, "starting on-boot check");
+						String remote_version = Utils.checkForNewVersion(ctx, true);
+						if (remote_version != null) {
+							NotificationManager notifManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+							Notification note = new Notification(
 								R.drawable.ic_launcher,
 								getText(R.string.alert),
-								System.currentTimeMillis());
-						note.setLatestEventInfo(chkIn, getText(R.string.alert),
-								String.format(
-										getText(R.string.new_version_available)
-												.toString(), remote_version),
-								PendingIntent.getActivity(chkIn, 0, new Intent(
-										chkIn, CheckIn.class), 0));
-						notifManager.notify(2456, note);
+								System.currentTimeMillis()
+							);
+							note.setLatestEventInfo(
+								CheckIn.this,
+								getText(R.string.alert),
+								String.format(getText(R.string.new_version_available).toString(), remote_version),
+								PendingIntent.getActivity(CheckIn.this, 0, new Intent(CheckIn.this, CheckIn.class), 0)
+							);
+							notifManager.notify(2456, note);
+						}
 					}
-					} catch ( Exception ex ) {
+					catch (Exception ex) {
 						ex.printStackTrace();
 						String http = Utils.getData();
 						if (http != null) {
@@ -69,8 +70,10 @@ public class CheckIn extends Service {
 					}
 				}
 			};
+			t.setDaemon(false);
 			t.start();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			String http = Utils.getData();
 			if (http != null) {
