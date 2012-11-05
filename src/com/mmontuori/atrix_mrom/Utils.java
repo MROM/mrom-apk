@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 public class Utils {
 	final static public String TAG = "MROM";
-	final static public String BASEURL = "http://www.montuori.net/mrom/checkin-new.php";
+	final static public String BASEURL = "http://www.montuori.net/mrom/checkin.php";
 	static public String _data = null;
 
 	@SuppressWarnings("serial")
